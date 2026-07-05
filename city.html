@@ -375,6 +375,23 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     .densbar input[type=range]::-moz-range-thumb{width:32px;height:32px}
     .arow input,.minput{min-height:34px;font-size:15px}
   }
+
+  @media(max-width:640px){
+    *{-webkit-tap-highlight-color:transparent}
+    .cmp-grid{grid-template-columns:1.15fr .92fr .92fr}
+    .cmp-grid>div{padding:10px 8px}
+    .cmp-col{font-size:11px} .cmp-col small{font-size:8.5px}
+    .cmp-metric{font-size:11.5px;line-height:1.25}
+    .cmp-metric small{display:block}
+    .cmp-v{font-size:14px}
+    .cmp-v.net-o,.cmp-v.net-p{font-size:15px}
+    .cmp-v .chg{display:block;margin:2px 0 0;font-size:9px;line-height:1}
+  }
+  .page-footer{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;max-width:1180px;margin:56px auto 0;padding:22px 32px 44px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .page-footer .pf-l{font-size:13px;font-weight:300;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3)}
+  .page-footer .pf-l b{color:var(--ink-2);font-weight:500;letter-spacing:.3em}
+  .page-footer .pf-r{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.7}
+  @media(max-width:640px){.page-footer{flex-direction:column;gap:8px;padding:20px 16px 44px;margin-top:40px}.page-footer .pf-r{text-align:left}}
 </style>
 </head>
 <body>
@@ -416,18 +433,18 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
       <div class="cmp-v prop" id="cmpDens">15,310 <span class="chg">×2.5</span></div>
 
       <div class="cmp-metric">Operating result · 30 yr <small style="color:var(--ink-3)">revenue − opex</small></div>
-      <div class="cmp-v orig">€339 m</div>
+      <div class="cmp-v orig">€375 m</div>
       <div class="cmp-v prop" id="cmpOp">€1.50 bn <span class="chg">×2.8</span></div>
 
       <div class="cmp-metric">− Net investing · capex, city-funded <small style="color:var(--ink-3)">aliquot to residents</small></div>
-      <div class="cmp-v orig" style="color:var(--down)">−€102 m</div>
+      <div class="cmp-v orig" style="color:var(--down)">−€83 m</div>
       <div class="cmp-v prop" id="cmpCapex" style="color:var(--down)">−€336 m <span class="chg">aliquot to residents</span></div>
 
       <div class="cmp-metric netr">= Net municipal position · 30 yr</div>
-      <div class="cmp-v net-o" style="color:var(--up)">+€237 m</div>
+      <div class="cmp-v net-o" style="color:var(--up)">+€292 m</div>
       <div class="cmp-v net-p" id="cmpNet">+€1.17 bn</div>
     </div>
-    <div class="cmp-flip">Even at today's low density the district is already <b class="pos">+€237 m</b> positive over 30 yr. Densifying more than <b>doubles the resident count</b> — so the aliquot infrastructure and services rise too (net investing <b class="neg">−€102 m → −€260 m</b>) — yet the net position still grows <b>×3.3 to <span class="pos">+€773 m</span></b>, because tax revenue on the larger, appreciating stock scales faster than the infrastructure it funds.</div>
+    <div class="cmp-flip">Even at today's low density the district is already <b class="pos">+€292 m</b> positive over 30 yr. Densifying more than <b>doubles the resident count</b> — so the aliquot infrastructure and services rise too (net investing <b class="neg">−€83 m → −€212 m</b>) — yet the net position still grows <b>×3.1 to <span class="pos">+€913 m</span></b>, because tax revenue on the larger, appreciating stock scales faster than the infrastructure it funds.</div>
   </div>
 
 
@@ -510,7 +527,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
         <div class="arow"><span>Line cost · €M/km</span><b>€<input id="metroKmCost" value="105">M</b></div>
         <div class="arow"><span>Line length · km</span><b><input id="metroKm" value="1.2">km</b></div>
         <div class="arow"><span>Station cost · €M each</span><b>€<input id="metroStCost" value="40">M</b></div>
-        <div class="arow"><span>Stations · n</span><b><input id="metroSt" value="4"></b></div>
+        <div class="arow"><span>Stations · n</span><b><input id="metroSt" value="1"></b></div>
       </div>
     </div>
 
@@ -633,6 +650,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     </div>
 
     <div class="plstrip res"><span class="lbl">= Operating result <small style="color:var(--ink-3); font-weight:400">(revenue − opex)</small></span><span class="v" id="cyPnlNet">€0</span><span class="v" id="cyOpResHz">€0</span></div>
+    <div class="note" style="margin:-4px 0 14px;font-size:11.5px;color:var(--ink-3);line-height:1.5">The <b style="color:var(--ink-2)">€/yr</b> column is <b>recurring</b> tax — for the city that is roughly <b>break-even</b> (≈€5 M/yr). The <b style="color:var(--ink-2)">30-yr total</b> is driven by the <b>one-off cession</b> (the serviced-land value the city receives) <b>+ construction tax</b>, delivered as each phase completes — which is why it far exceeds €/yr × 30. The city's real upside is the land cession, not annual tax.</div>
 
     <div class="plbox cost">
       <div class="pbh"><span class="nm">● Capex · one-off capital out</span><span class="cols">over <span id="plHz4">20</span> yr</span></div>
@@ -765,7 +783,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
   <!-- (E) VALUE COEFFICIENTS -->
   <div class="card prog">
     <h2 style="margin-bottom:6px">F · Value coefficient by use</h2>
-    <p class="h-sub" style="margin:0 0 8px">Market value vs free-market (free-market = 1.00). Homogenisation factor for value across uses. Reacts to the price inputs.</p>
+    <p class="h-sub" style="margin:0 0 8px">Homogenisation weight for value across uses (free-market = 1.00). Affordable/social carries a <b>0.50</b> policy weight; the city's 20% cession is taken on these weighted value units.</p>
     <table class="usetbl">
       <tr><th>Use</th><th>€/m²</th><th>Coefficient</th><th style="width:34%"></th></tr>
       <tr><td><span class="dot" style="background:var(--free)"></span>Free-market residential</td><td id="cfFreeP">€0</td><td class="coef" id="cfFree">1.00</td><td class="cbarcell"><div class="cbar"><i id="cbFree" style="background:var(--free)"></i></div></td></tr>
@@ -777,7 +795,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
       <span><i style="background:var(--free)"></i>Residential <b id="lgFree">1.00</b></span>
       <span><i style="background:var(--econ)"></i>Economic <b id="lgEcon">1.00</b></span>
     </div>
-    <div class="note" style="margin-top:10px">Coefficient = sale price ÷ free-market price.</div>
+    <div class="note" style="margin-top:10px">Value weight (homogenisation coefficient) used for the aprovechamiento cession: free-market &amp; economic = 1.00, affordable/social = <b>0.50</b> (VPO policy weight, per the Excel model).</div>
   </div>
 
   <div class="foot">
@@ -1192,7 +1210,7 @@ function calc(){
   // ---- density comparison · Original = fixed A baseline · Proposed = live model ----
   {
     const s=(id,html)=>{const e=$(id); if(e) e.innerHTML=html;};
-    const O={res:14769.946, dens:6005.702, op:339.0, netinv:-102.1, net:237.0};   // Excel Scenario A (€M)
+    const O={res:14769.946, dens:6005.702, op:375.0, netinv:-83.0, net:292.0};   // Excel Scenario A (€M)
     const chg=t=>' <span class="chg">'+t+'</span>';
     s('cmpRes', nf(pop)+chg('×'+(pop/O.res).toFixed(1)));
     s('cmpDens', nf(dens)+chg('×'+(dens/O.dens).toFixed(1)));
@@ -1267,20 +1285,20 @@ function calc(){
   $('tunCostN').textContent= fmtBn(tunTot);
   drawTunnel(tunLen, tunWid, tunArea, tunTot);
 
-  // ---- (E) value coefficients ----
-  const coef = p => pFree>0 ? p/pFree : 0;
+  // ---- (E) value coefficients — homogenisation weights used in the aprovechamiento cession (policy, = Excel) ----
+  const COEF_FREE=1, COEF_AFF=0.5, COEF_ECON=1;   // free/econ = 1.00 · social/affordable = 0.50 (VPO policy weight)
   $('cfFreeP').textContent = fmtE(pFree)+'/m²';
   $('cfAffP').textContent  = fmtE(pAff)+'/m²';
   $('cfEconP').textContent = fmtE(pEcon)+'/m²';
-  $('cfFree').textContent  = '1.00';
-  $('cfAff').textContent   = coef(pAff).toFixed(2);
-  $('cfEcon').textContent  = coef(pEcon).toFixed(2);
-  $('cbFree').style.width  = '100%';
-  $('cbAff').style.width   = (coef(pAff)*100).toFixed(0)+'%';
-  $('cbEcon').style.width  = (coef(pEcon)*100).toFixed(0)+'%';
-  $('lgAff').textContent   = coef(pAff).toFixed(2);
-  $('lgFree').textContent  = '1.00';
-  $('lgEcon').textContent  = coef(pEcon).toFixed(2);
+  $('cfFree').textContent  = COEF_FREE.toFixed(2);
+  $('cfAff').textContent   = COEF_AFF.toFixed(2);
+  $('cfEcon').textContent  = COEF_ECON.toFixed(2);
+  $('cbFree').style.width  = (COEF_FREE*100)+'%';
+  $('cbAff').style.width   = (COEF_AFF*100)+'%';
+  $('cbEcon').style.width  = (COEF_ECON*100)+'%';
+  $('lgAff').textContent   = COEF_AFF.toFixed(2);
+  $('lgFree').textContent  = COEF_FREE.toFixed(2);
+  $('lgEcon').textContent  = COEF_ECON.toFixed(2);
 }
 
 /* ---- P&L waterfall ---- */
@@ -1394,6 +1412,7 @@ restore();
 calc();
 </script>
 
+<footer class="page-footer"><div class="pf-l"><b>ALMA</b> · Capstone</div><div class="pf-r">Capstone team — Oliver · Miguel · Lisa · Caragh · Andre<br>Residual land-value model · IE MRED 2026</div></footer>
 <div class="densbar" id="densbar" aria-label="Density controls">
   <div class="db-out"><span class="dl">Net municipal position · 30 yr</span><b id="bOut">+€1.17 bn</b></div>
   <div class="db-grp">

@@ -78,6 +78,14 @@
     body :where(p,.note,.formula,.sub,.assump,.meta,.lede,.pd,td,.lh,.fm,.h-sub){overflow-wrap:anywhere}
     table{table-layout:fixed;width:100%}
   }
+
+  @media(max-width:520px){.kpis{grid-template-columns:1fr}.kpi{padding:18px 18px}}
+  @media(max-width:640px){*{-webkit-tap-highlight-color:transparent}.pcard{border-radius:14px}}
+  .page-footer{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;max-width:1180px;margin:56px auto 0;padding:22px 32px 44px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .page-footer .pf-l{font-size:13px;font-weight:300;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3)}
+  .page-footer .pf-l b{color:var(--ink-2);font-weight:500;letter-spacing:.3em}
+  .page-footer .pf-r{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.7}
+  @media(max-width:640px){.page-footer{flex-direction:column;gap:8px;padding:20px 16px 44px;margin-top:40px}.page-footer .pf-r{text-align:left}}
 </style>
 </head>
 <body>
@@ -89,7 +97,7 @@
 
   <div class="hero-banner">
     <div class="hb-kick">UZP 02.02 · Vicálvaro · Madrid</div>
-    <img class="hb-logo" src="alma-logo.png" alt="ALMA — Armonía · Libertad · Movimiento · Arraigo">
+    <img class="hb-logo" src="alma-logo-gold.png" alt="ALMA — Armonía · Libertad · Movimiento · Arraigo">
     <div class="hb-tag">A residual land-value model for the densification of the ALMA site — the land value it creates, how the land is distributed, and what the city gets.</div>
     <div class="hb-skyline"><i style="height:38%;background:var(--accent)"></i><i style="height:52%;background:var(--slate)"></i><i style="height:44%;background:var(--slate)"></i><i style="height:66%;background:var(--slate)"></i><i style="height:58%;background:var(--slate)"></i><i style="height:74%;background:var(--accent)"></i><i style="height:49%;background:var(--slate)"></i><i style="height:88%;background:var(--up)"></i><i style="height:62%;background:var(--slate)"></i><i style="height:55%;background:var(--slate)"></i><i style="height:100%;background:var(--up)"></i><i style="height:70%;background:var(--slate)"></i><i style="height:46%;background:var(--slate)"></i><i style="height:60%;background:var(--slate)"></i><i style="height:82%;background:var(--slate)"></i><i style="height:50%;background:var(--accent)"></i><i style="height:64%;background:var(--slate)"></i><i style="height:42%;background:var(--slate)"></i><i style="height:56%;background:var(--slate)"></i><i style="height:72%;background:var(--slate)"></i><i style="height:48%;background:var(--accent)"></i><i style="height:58%;background:var(--slate)"></i></div>
   </div>
@@ -103,7 +111,7 @@
     <div class="kpi"><div class="kl">Residual land value</div><div class="kv up">€687 m</div><div class="ks">proposed · phased FAR 0.80 / 1.05</div></div>
     <div class="kpi"><div class="kl">Value created</div><div class="kv gold">+€432 m</div><div class="ks">×2.7 vs today's FAR 0.39 (€255 m)</div></div>
     <div class="kpi"><div class="kl">Homes · residents</div><div class="kv acc">16,370</div><div class="ks">≈ 37,651 residents · 15,310 /km²</div></div>
-    <div class="kpi"><div class="kl">Municipality · net 30 yr</div><div class="kv up">+€773 m</div><div class="ks">incl. public-asset value</div></div>
+    <div class="kpi"><div class="kl">Municipality · net 30 yr</div><div class="kv up">+€913 m</div><div class="ks">incl. public-asset value</div></div>
   </div>
 
   <div class="sec-h">The model · three views</div>
@@ -124,11 +132,11 @@
       <div class="pn">03 · City view</div>
       <h3>The municipality's P&amp;L</h3>
       <div class="pd">The same densification seen from the Ayuntamiento — revenue, OPEX and CAPEX over 30 years, netting to the public bottom line. Population computed from density.</div>
-      <div class="pm"><span class="pmv up">+€773 m</span><span class="open">Open →</span></div>
+      <div class="pm"><span class="pmv up">+€913 m</span><span class="open">Open →</span></div>
     </a>
   </div>
 
-  <div class="foot"><span>ALMA — Capstone</span><span>Junta de Compensación · land development value</span></div>
+  <footer class="page-footer"><div class="pf-l"><b>ALMA</b> · Capstone</div><div class="pf-r">Capstone team — Oliver · Miguel · Lisa · Caragh · Andre<br>Residual land-value model · IE MRED 2026</div></footer>
 </div>
 </body>
 </html>

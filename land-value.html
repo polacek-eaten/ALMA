@@ -439,6 +439,13 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     .densbar input[type=range]::-moz-range-thumb{width:32px;height:32px}
     .arow input,.minput{min-height:34px;font-size:15px}
   }
+  /* mobile tap polish */
+  @media(max-width:640px){*{-webkit-tap-highlight-color:transparent}}
+  .page-footer{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;max-width:1180px;margin:56px auto 0;padding:22px 32px 44px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .page-footer .pf-l{font-size:13px;font-weight:300;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3)}
+  .page-footer .pf-l b{color:var(--ink-2);font-weight:500;letter-spacing:.3em}
+  .page-footer .pf-r{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.7}
+  @media(max-width:640px){.page-footer{flex-direction:column;gap:8px;padding:20px 16px 44px;margin-top:40px}.page-footer .pf-r{text-align:left}}
 </style>
 </head>
 <body>
@@ -631,7 +638,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
             <div><b>Profit vs costs</b><br>sale price − construction − developer margin</div>
             <div class="zr"><b>Land development costs</b><br>urbanisation · Junta · connecting — split out → leaves the residual land value</div>
           </div>
-          <div class="formula">Land value = GDV − Construction − Overhead − Urbanisation − Junta − Margin<br>
+          <div class="formula">Land value = GDV − Construction (incl. soft) − Overhead − Urbanisation − Junta − Margin<br>
             <span>GDV = retained GFA × saleable eff. × blended price · retained = (1 − 20 % cession)</span></div>
         </div>
 
@@ -975,8 +982,8 @@ function calc(){
   const landDevT=landParts.reduce((a,p)=>a+p.v,0);
   const steps=[
     {v:gdv,      col:'var(--free)',   lab:'GDV<br>net of cession'},
-    {v:buildT,   col:'var(--aff)',    lab:'– Construction<br>+ parking + ESG'},
-    {v:overheadT+softT,col:'#6b6b78', lab:'– Overhead<br>+ soft costs'},
+    {v:buildT+softT,   col:'var(--aff)',    lab:'– Construction<br>+ parking + soft'},
+    {v:overheadT,col:'#6b6b78', lab:'– Overhead'},
     {v:profitT,  col:'var(--blue-l)', lab:'– Developer<br>margin'},
     {v:landDevT, parts:landParts,     lab:'– Land development<br>costs'},
     {v:Math.abs(rlv), col: rlv<0?'var(--down)':'var(--up)', lab:'= Land<br>value'},
@@ -1014,9 +1021,8 @@ function calc(){
     row('var(--accent)','Parking sales',pkRevT,pct(pkRevT))+
     row('','GDV turnover · total',gdv,'100%','tot');
   $('bdCost').innerHTML =
-    row('var(--aff)','Construction (incl. parking + ESG)',buildT,pct(buildT))+
+    row('var(--aff)','Construction (incl. parking + soft costs)',buildT+softT,pct(buildT+softT))+
     (overheadT>0?row('#6b6b78','Overhead',overheadT,pct(overheadT)):'')+
-    (softT>0?row('#7d7d8a','Soft costs (% of works)',softT,pct(softT)):'')+
     row('#3a4250','Urbanisation',urbT,pct(urbT))+
     row('#5b6675','Junta fee',jfeeT,pct(jfeeT))+
     (connT>0?row('#7a8492','Connecting infrastructure',connT,pct(connT)):'')+
@@ -1066,7 +1072,7 @@ function calc(){
   $('cJunta').textContent  = fmtBn(jfeeT);
   $('cEsg').textContent    = fmtBn(esgLandT);
   $('cTotal').textContent  = fmtBn(infraCost);
-  $('cBuildTot').textContent = fmtBn(buildT);
+  $('cBuildTot').textContent = fmtBn(buildT+softT);
 
   // ---- per 100 m² of developable land (one parcel) ----
   const S=100/LAND_DEV;
@@ -1083,9 +1089,9 @@ function calc(){
   $('buildLegend').innerHTML = segs.map(s=>`<span><i style="background:${s.c}"></i>${s.n} <b>${s.v.toFixed(1)} m²e</b></span>`).join('');
   const rows=[
     {n:'Sales revenue (GDV, net of cession)', v:gdv*S},
-    {n:'– Construction (incl. parking + ESG)', v:-buildT*S},
+    {n:'– Construction (incl. parking + soft costs)', v:-(buildT+softT)*S},
     {n:'– Overhead', v:-overheadT*S},
-    {n:'– Urbanisation + infrastructure', v:-(urbT+connT)*S},
+    {n:'– Urbanisation + infrastructure', v:-(urbT+connT+esgLandT)*S},
     {n:'– Junta fee', v:-jfeeT*S},
     {n:'– Developer margin', v:-profitT*S}
   ];
@@ -1256,7 +1262,7 @@ function renderFinance(gdv, rlv, costsTot, profit, cess, infraCost, phaseData){
 function renderCostInfographic(buildT, urbT, jfeeT, connT){
   const infra=urbT+jfeeT+connT, total=buildT+infra;
   const parts=[
-    {nm:'Construction (incl. parking + ESG)', v:buildT, col:'#7e8794', dark:false},
+    {nm:'Building (construction + overhead + soft)', v:buildT, col:'#7e8794', dark:false},
     {nm:'Urbanisation', v:urbT,  col:'#3a4250'},
     {nm:'Junta fee',    v:jfeeT, col:'#5b6675'},
   ];
@@ -1447,6 +1453,7 @@ restore();
 calc();
 </script>
 
+<footer class="page-footer"><div class="pf-l"><b>ALMA</b> · Capstone</div><div class="pf-r">Capstone team — Oliver · Miguel · Lisa · Caragh · Andre<br>Residual land-value model · IE MRED 2026</div></footer>
 <div class="densbar" id="densbar" aria-label="Density controls">
   <div class="db-out"><span class="dl">Residual land value</span><b id="bOut">€549 m</b></div>
   <div class="db-grp">
