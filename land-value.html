@@ -29,6 +29,26 @@ body{margin:0; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',s
 .brandbar .mark{font-weight:300; letter-spacing:.26em; font-size:13px; text-transform:uppercase; color:var(--ink-3)}
 .brandbar .mark b{color:var(--ink-2); font-weight:500; letter-spacing:.3em}
 .brandbar .ctx{font-size:12px; color:var(--ink-3); letter-spacing:.16em; text-transform:uppercase; text-align:right; line-height:1.7}
+/* attention-first headline KPI band */
+.hero-kpi{display:flex;align-items:center;gap:16px 22px;flex-wrap:wrap;margin:20px 0 4px;padding:18px 22px;border:1px solid var(--line);border-left:3px solid var(--up);border-radius:14px;background:linear-gradient(120deg,rgba(111,202,154,.10),rgba(201,168,106,.05))}
+.hero-kpi .hk-num{font-size:clamp(36px,7vw,48px);font-weight:700;letter-spacing:-.02em;color:var(--up);line-height:1;font-variant-numeric:tabular-nums}
+.hero-kpi .hk-lab{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:7px}
+.hero-kpi .hk-side{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.hk-chip{font-size:12.5px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2);background:var(--surface);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hk-chip b{color:var(--accent);font-weight:600}
+@media(max-width:640px){.hero-kpi{padding:15px 16px}.hero-kpi .hk-side{margin-left:0}}
+.pagenav{display:flex;gap:8px;margin:-8px 0 24px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px}
+.pagenav::-webkit-scrollbar{display:none}
+.pagenav a{flex:none;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink-2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;transition:border-color .18s,color .18s}
+.pagenav a:hover{border-color:var(--accent-d);color:var(--ink)}
+.pagenav a.act{border-color:var(--accent);color:var(--accent);background:rgba(201,168,106,.1);font-weight:600;pointer-events:none}
+.pagenav a .n{font-size:10px;color:var(--ink-3);font-weight:600;letter-spacing:.08em}
+.pagenav a.act .n{color:var(--accent-d)}
+@media(max-width:640px){.pagenav{margin:-4px -15px 20px;padding:2px 15px}.pagenav a{padding:11px 15px;font-size:12.5px}}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+.brand-logo{height:46px;width:auto;display:block}
+.brand-sub{font-weight:300;letter-spacing:.26em;font-size:12px;text-transform:uppercase;color:var(--ink-3);border-left:1px solid var(--line);padding-left:14px;line-height:1.3}
+@media(max-width:640px){.brand-logo{height:38px}.brand{gap:11px}.brand-sub{padding-left:11px;font-size:11px}}
 
 .eyebrow{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent-d); font-weight:500}
 h1{font-size:clamp(30px,4.4vw,46px); font-weight:500; letter-spacing:-.02em; line-height:1.08; margin:12px 0 12px}
@@ -43,7 +63,15 @@ h1{font-size:clamp(30px,4.4vw,46px); font-weight:500; letter-spacing:-.02em; lin
 .herolegend b{color:var(--accent); font-weight:500}
 .herolegend .cap{margin-left:auto; color:var(--ink-3); font-size:11px}
 .grid{display:grid; grid-template-columns:350px 1fr; gap:22px; margin-top:38px; align-items:start}
-@media(max-width:920px){.grid{grid-template-columns:1fr}}
+@media(max-width:920px){
+  .grid{grid-template-columns:1fr}
+  /* mobile: results & graphs first, levers after them */
+  .grid>div:first-child{order:2}
+  .grid>div:last-child{order:1}
+}
+#assumpDock{display:none;margin-top:22px}
+#assumpDock .assump{border-top:0;margin-top:0;padding-top:0}
+@media(max-width:920px){#assumpDock.on{display:block}}
 
 .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
 .pad{padding:22px}
@@ -382,7 +410,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
 .citylink-row{display:flex; align-items:center; justify-content:space-between; gap:26px; flex-wrap:wrap}
 .citybtn{flex:none; display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; letter-spacing:.02em; color:#13151b; background:var(--accent); text-decoration:none; padding:12px 22px; border-radius:11px; transition:.2s var(--ease)}
 .citybtn:hover{background:#fff}
-.topctrl{display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:10px}
+.topctrl{display:flex; justify-content:flex-end; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:10px}
 .ctrlr{display:flex; align-items:center; gap:14px}
 .savetag{font-size:11px; color:var(--ink-3); opacity:.5; letter-spacing:.04em; transition:opacity .3s}
 .rstbtn{font:inherit; font-size:12px; font-weight:500; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--line); border-radius:8px; padding:6px 13px; cursor:pointer; transition:.18s}
@@ -413,6 +441,9 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     .top,.arow,.crow,.lr,.zr,.headline-val,.wf,.costhead,.persqm,.skyhead,.labs,.stat,.metrow,.herolegend{flex-wrap:wrap}
     .wrap p,.note,.formula,.sub,.assump,.meta,.lede,td,.lh,.fm,.crow>span{overflow-wrap:anywhere}
     table{table-layout:fixed;width:100%}
+    /* financing tables scroll sideways instead of crushing */
+    .fintbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;table-layout:auto;white-space:nowrap}
+    .fintbl td,.fintbl th{overflow-wrap:normal;padding-right:16px}
     .wrap{padding-left:14px;padding-right:14px}
   }
 
@@ -424,6 +455,8 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     .brandbar .ctx{text-align:left!important;line-height:1.55;font-size:11px}
     h1{font-size:30px;line-height:1.1}
     .legend,.skyhead,.labs,.persqm,.landsplit,.skyline{flex-wrap:wrap;gap:8px 12px}
+    .landsplit .ls{flex-wrap:wrap}
+    .landsplit .ls b+.l{flex:1 1 100%;line-height:1.5}
     .masscompare{grid-template-columns:1fr 1fr}
     table{font-size:11.5px}
     .costhead,.wf{flex-wrap:wrap}
@@ -453,12 +486,18 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
 <div class="wrap">
 
   <div class="brandbar">
-    <div class="mark"><b>ALMA</b> · Capstone</div>
-    <div class="ctx"><span style="color:var(--ink-2)">Capstone team — Oliver · Miguel · Lisa · Caragh · Andre</span><br>Residual land-value model · IE MRED 2026</div>
+    <a class="brand" href="index.html"><img class="brand-logo" src="alma-logo-gold.png" alt="ALMA"><span class="brand-sub">Capstone</span></a>
+    <div class="ctx">Residual land-value model<br>IE MRED 2026</div>
   </div>
 
+  <nav class="pagenav" aria-label="Model pages">
+    <a href="index.html"><span class="n">⌂</span>Dashboard</a>
+    <a href="land-value.html" class="act" aria-current="page"><span class="n">01</span>Land value</a>
+    <a href="land-distribution.html"><span class="n">02</span>Land distribution</a>
+    <a href="city.html"><span class="n">03</span>City view</a>
+  </nav>
+
   <div class="topctrl">
-    <div class="navlinks" style="display:flex;gap:18px;flex-wrap:wrap"><a class="alink" href="index.html">&larr; Dashboard</a><a class="alink" href="land-distribution.html">Land distribution &rarr;</a><a class="alink" href="city.html">City view &rarr;</a></div>
     <div class="ctrlr">
       <span id="saveTag" class="savetag">auto-saved · synced with city view</span>
       <button id="resetBtn" class="rstbtn">↻ Reset to defaults</button>
@@ -467,7 +506,16 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
 
   <div class="eyebrow">Residual land value · interactive</div>
   <h1>ALMA model</h1>
-  <p class="lede">A residual land-value model for the ALMA densification proposal. Adjust <span style="color:var(--accent)">density</span> and the <span style="color:var(--accent)">affordable mix</span> for <b>Phase&nbsp;I</b> and <b>Phases&nbsp;II–III</b>; land value is what remains after construction, urbanisation, the municipal cession and the developer's 27&nbsp;% margin — blended across affordable and free-market product, at fixed sale prices and unit costs.</p>
+
+  <div class="hero-kpi">
+    <div><span class="hk-num" id="hkRlv">€1.75 bn</span><span class="hk-lab">Residual land value · densified</span></div>
+    <div class="hk-side">
+      <span class="hk-chip"><b id="hkGfa">4,615,708</b> m²e GFA</span>
+      <span class="hk-chip"><b id="hkPerGfa">€378</b> / m²e</span>
+    </div>
+  </div>
+
+  <p class="lede">A residual land-value model for the ALMA densification proposal. Adjust <span style="color:var(--accent)">density</span> and the <span style="color:var(--accent)">affordable mix</span> for <b>Phase&nbsp;I</b> and <b>Phases&nbsp;II–III</b>; land value is what remains after construction, urbanisation, the municipal cession and the developer's 25&nbsp;% margin — blended across affordable and free-market product, at fixed sale prices and unit costs.</p>
 
   <figure class="hero">
     <div class="layoutbox">
@@ -495,7 +543,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
             <div class="top"><span class="name">Density · GFA / developable land</span>
               <span class="val" id="vDI">0.39 <small>m²e/m²</small></span></div>
             <input id="dI" type="range" min="0.39" max="1.50" step="0.01" value="0.80">
-            <div class="sub">On developable land · NUP minimum 0.60 · solares → 0 at ~2.0 (cesiones 0.50×GFA)</div>
+            <div class="sub">GFA per m² of the phase's land share (Excel basis) · proposal 0.80 · baseline 0.39</div>
           </div>
           <div class="mini">
             <div class="top"><span class="name">Affordable + social (% of housing)</span>
@@ -511,7 +559,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
             <div class="top"><span class="name">Density · GFA / developable land</span>
               <span class="val" id="vDR">0.39 <small>m²e/m²</small></span></div>
             <input id="dR" type="range" min="0.39" max="1.50" step="0.01" value="1.05">
-            <div class="sub">On developable land · NUP minimum 0.80 · solares → 0 at ~2.0 (cesiones 0.50×GFA)</div>
+            <div class="sub">GFA per m² of the phase's land share (Excel basis) · proposal 1.05 · baseline 0.39</div>
           </div>
           <div class="mini">
             <div class="top"><span class="name">Affordable + social (% of housing)</span>
@@ -522,9 +570,9 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
         </div>
 
         <div class="mini" style="margin-bottom:18px">
-          <div class="top"><span class="name">Blended density · on developable land</span>
+          <div class="top"><span class="name">Blended density · GFA / developable</span>
             <span class="val" id="vBlend">0.39 <small>m²e/m²</small></span></div>
-          <div class="sub">Current parameters (Phase I 0.60 / Rest 0.80 on developable). Density = GFA per m² of developable land — matches the Excel model.</div>
+          <div class="sub">GFA ÷ developable land (2.46 km²). Uniform baseline = 0.39. Per-phase density (above) is GFA per m² of each phase's land allotment — matches the Excel model.</div>
         </div>
 
         <div class="ctrl">
@@ -573,6 +621,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
             <div class="arow"><span>m² per parking space</span><b><input id="m2Space" value="28">m²</b></div>
             <div class="arow"><span>Parking sale · €/space</span><b>€<input id="pPark" value="25000"></b></div>
             <div class="arow"><span>Sellable parking · %</span><b><input id="pkSell" value="60">%</b></div>
+            <div class="arow"><span>Affordable parking · % of standard</span><b><input id="affPark" value="7">%</b></div>
           </div>
 
           <div class="agrp">
@@ -605,7 +654,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
             <div class="arow"><span>Phase III · % of value</span><b><input id="phW3" value="35">%</b></div>
           </div>
         </div>
-        <div class="note">Total intervention area = <b id="landHa">4.73</b> M m² (473 ha). At 0.39 → 1,835,466 m²e (current). Construction incl. kitchen (no furniture) + pool. Margin on GDV. Edit any field to test sensitivity.</div>
+        <div class="note">Total intervention area = <b id="landHa">4.73</b> M m² (473 ha). Uniform baseline 0.39 → 1.85 M m²e; proposal 0.80/1.05 → 4.62 M m²e. Construction incl. kitchen (no furniture) + pool. Margin on GDV. Edit any field to test sensitivity.</div>
       </div>
     </div>
 
@@ -615,7 +664,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
         <h2>Land value</h2>
         <div class="headline-val">
           <div class="bignum" id="rlvTotal">€0</div>
-          <div class="unit"><b>residual</b> land value<br><small>net of construction, on-site infrastructure &amp; 27% margin</small></div>
+          <div class="unit"><b>residual</b> land value<br><small>net of construction, on-site infrastructure &amp; 25% margin</small></div>
         </div>
         <div class="landsplit" id="landSplit"></div>
         <div class="persqm">
@@ -774,7 +823,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
       <div class="fstep"><span class="fnum">1</span><div class="fb"><span class="fl">Total intervention area</span><span class="fv" id="f1">0 m²</span></div></div>
       <div class="fop">carve the land — 52 % developable · 48 % green reserve / corridor (Cañada Real)</div>
       <div class="fstep"><span class="fnum">2</span><div class="fb"><span class="fl">Developable land · Phase I + Phase II &amp; III</span><span class="fv" id="f2">0 m²</span></div></div>
-      <div class="fop">apply density (GFA / developable land) — NUP minimum Phase I 0.60 · Phase II &amp; III 0.80 · up to G+15</div>
+      <div class="fop">apply density on the phase's land share — proposal Phase I 0.80 · Phase II &amp; III 1.05 · up to G+15</div>
       <div class="fstep"><span class="fnum">3</span><div class="fb"><span class="fl">Buildable floor area generated (GFA)</span><span class="fv" id="f3">0 m²e</span></div></div>
       <div class="fop red">↓ the city takes its cession here</div>
       <div class="fsplit">
@@ -787,7 +836,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
         <div class="fbr"><div class="bl"><i style="background:#cfd3da"></i>Free-market</div><div class="bv" id="f5f">0 m²e</div></div>
         <div class="fbr"><div class="bl"><i style="background:#a89a82"></i>Economic</div><div class="bv" id="f5e">0 m²e</div></div>
       </div>
-      <div class="fop">sell (× price) − construction − infrastructure − Junta fee − 27 % developer margin</div>
+      <div class="fop">sell (× price) − construction − infrastructure − Junta fee − 25 % developer margin</div>
       <div class="fstep final"><span class="fnum">✓</span><div class="fb"><span class="fl">Residual land value (whole site)</span><span class="fv" id="f6">€0</span></div></div>
     </div>
   </div>
@@ -831,10 +880,13 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     </div>
   </div>
 
+  <!-- mobile: assumptions relocate here (end of page) -->
+  <div class="card pad" id="assumpDock"><h2>Assumptions · editable inputs</h2></div>
+
   <div class="foot">
-    Method: residual land value = GDV (net of municipal cession) − construction (incl. parking + ESG) − urbanisation − developer margin (% of GDV), computed per phase and summed. Parameters from the ALMA NUP capstone brief (IE MRED): total intervention area <b>4.7 M m²</b> = developable land 2,459,322 m² (Phase I 737,797 (30%) + Phase II &amp; III 1,721,525 (70%)) + green reserve 2,274,738 m². Density is measured as GFA per m² of <b>developable</b> land (matches the Excel model). Current parameters <b>Phase I 0.60 / Phase II &amp; III 0.80 on developable</b> → GFA ≈ 1.97 M m²e; NUP allows densification up to G+15 floors. Residential 85 % (affordable Phase I &gt;50 %, Phase II &amp; III &gt;60 %), economic ≥15 %; cesiones to city = I_total = 0.50×GFA (viario 0.30 + green 0.15 = 30 % of I_total + private social 0.05). Prices and costs are <b>working assumptions for this model, not appraised values</b>. <b>Uplift</b> compares the selected densities against current parameters (0.60 / 0.80), holding mix and prices constant — the value created by the densification proposal.
+    Method: residual land value = GDV (net of municipal cession) − construction (incl. parking + ESG) − urbanisation − Junta fee − developer margin (25 % of GDV), computed per phase and summed. Parameters from the ALMA NUP capstone brief (IE MRED): total intervention area <b>4.73 M m²</b> = developable land 2,459,320 m² (52 %) + green reserve 2,274,740 m² (48 %). Density (GFA per m² of each phase's land allotment, phases 30 / 35 / 35 % of the total area) — matches the Excel Model. Proposal <b>Phase I 0.80 / Phase II &amp; III 1.05</b> → GFA <b>4.62 M m²e</b>; uniform baseline 0.39 → 1.85 M m²e; NUP allows densification up to G+15 floors. Residential 85 % (affordable Phase I 50 %, Phase II &amp; III 61 %), economic 15 %; cesiones to city = 20 % of value units. Prices and costs are <b>working assumptions for this model, not appraised values</b>. <b>Uplift</b> compares the proposal against the uniform baseline (0.39 · 50 % affordable · 10 % cession) — the value created by densifying &amp; redistributing.
   </div>
-  <div class="disc">Informačný charakter — interný analytický model, nie je investičným prospektom ani verejnou ponukou cenných papierov. Investovanie je spojené s rizikom vrátane straty kapitálu. Hodnoty sú orientačné a negarantované.</div>
+  <div class="disc">Informational only — an internal analytical model, not an investment prospectus or a public offering of securities. Investing carries risk, including loss of capital. All figures are indicative and not guaranteed.</div>
 </div>
 
 <script>
@@ -844,10 +896,12 @@ const LAND_P1  = 737797;         // Phase I = 30% of developable land, m²
 const LAND_R   = 1721525;        // Phase II & III = 70% of developable, m²
 const LAND_DEV = LAND_P1+LAND_R; // 2,459,322 — developable (52%)
 const LAND_RES = LAND-LAND_DEV;  // 2,274,738 — green reserve / corridor (48%)
-const D_CUR_I = 0.60, D_CUR_R = 0.80;   // current parameters ON DEVELOPABLE (baseline → 1,835,466 m²e, blended 0.39 on total)
-const TOT_FACTOR = LAND/LAND_DEV;        // density basis: sliders are GFA/TOTAL land → ×factor → GFA/developable (internal calc). ≈1.925
+const D_CUR_I = 0.39, D_CUR_R = 0.39;   // Scenario A uniform baseline density (Excel Model H27) — GFA on TOTAL land
+const D_BASE_AFF = 0.50, D_BASE_CESS = 0.10;  // Scenario A baseline: 50% affordable · 10% cession (Excel Model H28/H29)
+const TOT_FACTOR = LAND/LAND_DEV;        // GFA basis: density × total-land phase allotment = density × developable × factor. ≈1.925
 let RESID = 0.85;                // residential share of GFA (from input)
 let ECON  = 0.15;                // economic activity = auto remainder (1 − residential)
+let AFF_PARK = 0.07;             // affordable units get parking at 7% of standard provision (Excel Model B19)
 const URB_FACTOR = 0.50;         // urbanised land per GFA: public realm + green (obras de urbanización). Private social (0.10) = a building, not urbanisation.
 const ECO_COL='#a89a82';         // economic activity (muted taupe)
 const fmtE = n => (n<0?'–€':'€') + Math.abs(Math.round(n)).toLocaleString('en-US');
@@ -859,7 +913,7 @@ const fmtM2 = (n,u)=> Math.round(n).toLocaleString('en-US')+' '+(u||'m²');
 
 /* residual-land-value model for one phase */
 function phaseModel(land, dens, affShare, cess, esg, pFree, pAff, pEcon, cBuild, cPark, parkProv, cUrb, cConn, junta, margin, sellEff, m2Space, pPark, pkSell, ovh, urbF, softPct, floors, hThresh, hPrem, hUtilPen){
-  const gfa  = land*dens;
+  const gfa  = land*dens*TOT_FACTOR;   // GFA = density × total-land phase allotment (Excel Model B50: land 30/35/35% of TOTAL × density)
   // value-unit aprovechamiento cession (replicates Excel Model/City-30Y): city takes `cess` of VALUE, affordable weighted 0.5
   const coefFree=1, coefAff=0.5, handAff=0.5;
   const resiRaw=gfa*RESID, econRaw=gfa*ECON;
@@ -884,20 +938,21 @@ function phaseModel(land, dens, affShare, cess, esg, pFree, pAff, pEcon, cBuild,
   const gdvAff  = aff *effSell*pAff;                     // affordable housing GDV
   const gdvEcon = econ*effSell*pEcon;                    // economic-use GDV
   const gdvH = gdvFree + gdvAff + gdvEcon;               // housing GDV — only effSell of GFA is saleable
-  const pkSpaces = m2Space>0 ? parkProv*gfaR/m2Space : 0; // total parking spaces built
+  const pkBase = free + econ + AFF_PARK*aff;             // parking demand: affordable at AFF_PARK of standard (Excel Model)
+  const pkSpaces = m2Space>0 ? parkProv*pkBase/m2Space : 0; // total parking spaces built
   const pkSold = pkSpaces*pkSell;                        // sellable spaces (rest reserved for public)
   const pkPublic = pkSpaces - pkSold;                    // public / non-sellable spaces
   const pkRev = pkSold*pPark;                            // parking sales revenue (only sellable)
   const gdv  = gdvH + pkRev;                             // total turnover = housing + parking sales
-  const buildShell = gfaR*effCBuild;                     // building shell / construction (height-adjusted)
-  const buildPark  = gfaR*cPark*parkProv;                // underground parking
+  const buildShell = gfaR*effCBuild;                     // building shell / construction — full retained GFA
+  const buildPark  = pkBase*cPark*parkProv;              // underground parking — reduced for affordable units
   const build= buildShell + buildPark;                   // total construction (all ∝ GFA → grows with density)
   const overhead = build*(ovh||0);                       // developer overhead (% of construction)
   const soft = build*(softPct||0);                       // soft costs (legal/marketing/technical · % of works)
   const urb  = cUrb*(urbF!=null?urbF:URB_FACTOR)*land;   // urbanisation tied to LAND area (fixed, density-independent)
   const conn = cConn*gfa;                          // connecting infrastructure (capital contribution)
-  const esgLand = (urb+conn)*((esg||0)/100);       // ESG extra on land-dev works (% of urbanisation+connecting) — matches Excel Model C32
-  const jfee = junta*(urb+conn);                   // Junta fee — only on networks / infrastructure, not on building construction
+  const esgLand = (urb+conn)*((esg||0)/100);       // ESG extra on land-dev works (% of developable urbanisation) — Excel Model €23.36m
+  const jfee = junta*(urb*TOT_FACTOR+conn);        // Junta fee — 7% of urbanisation over the whole managed area (total land) — Excel Model OPEX €31.48m
   const profit=gdv*margin;
   const rlv  = gdv-build-overhead-soft-urb-conn-esgLand-jfee-profit;
   return {gfa,gfaR,aff,free,econ,ceded,price,gdvFree,gdvAff,gdvEcon,gdvH,pkRev,pkSpaces,pkSold,pkPublic,gdv,build,overhead,soft,urb,conn,esgLand,jfee,profit,rlv};
@@ -918,6 +973,7 @@ function calc(){
   const hPrem=+$('hPrem').value/100, hUtilPen=+$('hUtilPen').value/100;  // construction premium + útil penalty above threshold
   RESID = Math.min(1, Math.max(0, +$('resiShare').value/100));   // residential share (input)
   ECON  = 1 - RESID;                                              // economic = auto remainder
+  AFF_PARK = Math.min(1, Math.max(0, +$('affPark').value/100));  // affordable parking as % of standard
   $('econAuto').textContent = Math.round(ECON*100);
   const shared=[cess,esg,pFree,pAff,pEcon,cBuild,cPark,parkProv,cUrb,cConn,junta,margin,sellEff,m2Space,pPark,pkSell,ovh,urbF,softPct,bFloors,hThresh,hPrem,hUtilPen];
 
@@ -928,9 +984,10 @@ function calc(){
   const price = gfaR>0 ? (mI.price*mI.gfaR + mR.price*mR.gfaR)/gfaR : 0;   // blended headline €/m² saleable
   const blend = gfa/LAND_DEV;                      // blended density on DEVELOPABLE (matches Excel)
 
-  // current-parameter reference (same mix, baseline densities) → uplift
-  const cI=phaseModel(LAND_P1, D_CUR_I, aI, ...shared);
-  const cR=phaseModel(LAND_R, D_CUR_R, aR, ...shared);
+  // Scenario A uniform baseline (0.39 density · 50% affordable · 10% cession) → uplift = value created by densifying
+  const sharedBase=[D_BASE_CESS, ...shared.slice(1)];
+  const cI=phaseModel(LAND_P1, D_CUR_I, D_BASE_AFF, ...sharedBase);
+  const cR=phaseModel(LAND_R, D_CUR_R, D_BASE_AFF, ...sharedBase);
   const uplift = rlv - (cI.rlv+cR.rlv);
 
   $('vDI').innerHTML=dIt.toFixed(2)+' <small>m²e/m²</small>';
@@ -962,10 +1019,10 @@ function calc(){
   const up=$('uplift');
   if(Math.abs(dI-D_CUR_I)<0.02 && Math.abs(dR-D_CUR_R)<0.02){
     up.className='uplift';
-    up.innerHTML='At <b>current parameters</b> (0.60 / 0.80 on developable). Raise either density to test the densification upgrade.';
+    up.innerHTML='At the <b>uniform baseline</b> (0.39 density · 50% affordable · 10% cession). Raise either density to test the densification upgrade.';
   } else {
     up.className='uplift '+(uplift>=0?'pos':'neg');
-    up.innerHTML=`<b>${uplift>=0?'+':''}${fmtBn(uplift)}</b> vs current parameters (0.60 / 0.80 developable)`;
+    up.innerHTML=`<b>${uplift>=0?'+':''}${fmtBn(uplift)}</b> vs uniform baseline (0.39 · 50% affordable · 10% cession)`;
   }
 
   const f=$('flag');
@@ -1184,7 +1241,7 @@ function renderDensitySens(cess, RESID, sellEff){
   const nf=n=>Math.round(n).toLocaleString('en-US');
   const rows=[
     {g:'Keeping the project’s ratios — green / social / roads intact'},
-    {l:'Current parameters', s:'0.60 / 0.80 per phase', far:0.746, keep:true, cur:true},
+    {l:'Uniform baseline', s:'0.39 per phase', far:0.39, keep:true, cur:true},
     {l:'All plots → G+15', s:'solares fully built, ratios kept', far:1.5, keep:true, nup:true},
     {l:'Hard ceiling', s:'solares → 0 (no plots left)', far:2.0, keep:true},
     {g:'Abandoning the ratios — paving the developable land at G+15'},
@@ -1455,7 +1512,7 @@ calc();
 
 <footer class="page-footer"><div class="pf-l"><b>ALMA</b> · Capstone</div><div class="pf-r">Capstone team — Oliver · Miguel · Lisa · Caragh · Andre<br>Residual land-value model · IE MRED 2026</div></footer>
 <div class="densbar" id="densbar" aria-label="Density controls">
-  <div class="db-out"><span class="dl">Residual land value</span><b id="bOut">€549 m</b></div>
+  <div class="db-out"><span class="dl">Residual land value</span><b id="bOut">€1.75 bn</b></div>
   <div class="db-grp">
     <div class="dl"><span>Phase I density</span><b id="bVDI">0.80</b></div>
     <input type="range" id="bDI" min="0.39" max="1.50" step="0.01" value="0.80" aria-label="Phase I density">
@@ -1478,6 +1535,31 @@ calc();
     if(g('lvTotal'))g('bOut').textContent=g('lvTotal').textContent;
   };
   syncDensBar();
+})();
+</script>
+<script>
+/* headline KPI band mirrors the live model values */
+(function(){
+  function bind(srcId,dstId){var s=document.getElementById(srcId),d=document.getElementById(dstId);if(!s||!d)return;
+    var f=function(){d.textContent=s.textContent;};
+    new MutationObserver(f).observe(s,{childList:true,characterData:true,subtree:true}); f();}
+  bind('rlvTotal','hkRlv'); bind('gfaTot','hkGfa'); bind('rlvGfa','hkPerGfa');
+})();
+</script>
+<script>
+/* mobile: move the assumptions block to the end of the page; restore on desktop */
+(function(){
+  var mq=window.matchMedia('(max-width:920px)');
+  var asm=document.querySelector('.assump'), dock=document.getElementById('assumpDock');
+  if(!asm||!dock) return;
+  var marker=document.createElement('div'); marker.style.display='none';
+  asm.parentNode.insertBefore(marker,asm);
+  function place(){
+    if(mq.matches){ dock.appendChild(asm); dock.classList.add('on'); }
+    else{ marker.parentNode.insertBefore(asm,marker.nextSibling); dock.classList.remove('on'); }
+  }
+  if(mq.addEventListener) mq.addEventListener('change',place); else mq.addListener(place);
+  place();
 })();
 </script>
 </body>

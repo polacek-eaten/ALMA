@@ -29,6 +29,28 @@ body{margin:0; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',s
 .brandbar .mark{font-weight:300; letter-spacing:.26em; font-size:13px; text-transform:uppercase; color:var(--ink-3)}
 .brandbar .mark b{color:var(--ink-2); font-weight:500; letter-spacing:.3em}
 .brandbar .ctx{font-size:12px; color:var(--ink-3); letter-spacing:.16em; text-transform:uppercase; text-align:right; line-height:1.7}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+.brand-logo{height:46px;width:auto;display:block}
+.brand-sub{font-weight:300;letter-spacing:.26em;font-size:12px;text-transform:uppercase;color:var(--ink-3);border-left:1px solid var(--line);padding-left:14px;line-height:1.3}
+@media(max-width:640px){.brand-logo{height:38px}.brand{gap:11px}.brand-sub{padding-left:11px;font-size:11px}}
+/* attention-first headline KPI band */
+.hero-kpi{display:flex;align-items:center;gap:16px 22px;flex-wrap:wrap;margin:20px 0 4px;padding:18px 22px;border:1px solid var(--line);border-left:3px solid var(--up);border-radius:14px;background:linear-gradient(120deg,rgba(111,202,154,.10),rgba(201,168,106,.05))}
+.hero-kpi .hk-num{font-size:clamp(36px,7vw,48px);font-weight:700;letter-spacing:-.02em;color:var(--up);line-height:1;font-variant-numeric:tabular-nums}
+.hero-kpi .hk-lab{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:7px}
+.hero-kpi .hk-side{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.hk-chip{font-size:12.5px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2);background:var(--surface);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hk-chip b{color:var(--accent);font-weight:600}
+@media(max-width:640px){.hero-kpi{padding:15px 16px}.hero-kpi .hk-side{margin-left:0}}
+.pagenav{display:flex;gap:8px;margin:-4px 0 24px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px}
+.pagenav::-webkit-scrollbar{display:none}
+.pagenav a{flex:none;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink-2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;transition:border-color .18s,color .18s}
+.pagenav a:hover{border-color:var(--accent-d);color:var(--ink)}
+.pagenav a.act{border-color:var(--accent);color:var(--accent);background:rgba(201,168,106,.1);font-weight:600;pointer-events:none}
+.pagenav a .n{font-size:10px;color:var(--ink-3);font-weight:600;letter-spacing:.08em}
+.pagenav a.act .n{color:var(--accent-d)}
+@media(max-width:640px){.pagenav{margin:0 -15px 20px;padding:2px 15px}.pagenav a{padding:11px 15px;font-size:12.5px}}
+#cityDock{display:none;margin-top:22px}
+@media(max-width:920px){#cityDock.on{display:block}}
 .backlink{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:var(--accent-d); text-decoration:none; font-weight:500; letter-spacing:.04em; margin-bottom:22px; padding:7px 13px; border:1px solid var(--line); border-radius:9px; background:var(--surface); transition:.2s var(--ease)}
 .backlink:hover{border-color:var(--accent-d); color:var(--accent); background:var(--surface-2)}
 
@@ -229,7 +251,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
 .plstrip.res{background:var(--surface-2); border:1px solid var(--line)}
 .plstrip.net{background:rgba(207,211,218,.06); border:1px solid var(--accent); font-size:15px}
 .plstrip.net .lbl{font-weight:700}
-.topctrl{display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:8px}
+.topctrl{display:flex; justify-content:flex-end; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:8px}
 .ctrlr{display:flex; align-items:center; gap:14px}
 .savetag{font-size:11px; color:var(--ink-3); opacity:.5; letter-spacing:.04em; transition:opacity .3s; font-variant-numeric:tabular-nums}
 .rstbtn{font:inherit; font-size:12px; font-weight:500; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--line); border-radius:8px; padding:6px 13px; cursor:pointer; transition:.18s}
@@ -363,6 +385,13 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     body :where(.top,.arow,.crow,.lr,.zr,.headline-val,.wf,.costhead,.persqm,.skyhead,.labs,.stat,.metrow,.herolegend,.madrid,.plstrip,.kpi,.pm,.kpis){flex-wrap:wrap}
     body :where(p,.note,.formula,.sub,.assump,.meta,.lede,.pd,td,.lh,.fm,.h-sub){overflow-wrap:anywhere}
     table{table-layout:fixed;width:100%}
+    /* wide data tables scroll sideways instead of crushing */
+    .yeartbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;table-layout:auto;white-space:nowrap}
+    .yeartbl td,.yeartbl th{overflow-wrap:normal}
+    .yeartbl td small{white-space:normal}
+    /* P&L: give the label column room */
+    .plt td:first-child{width:54%}
+    .plt .minput{max-width:60px}
   }
   /* ── touch-friendly sliders + no scroll-jitter on drag ── */
   input[type=range]{touch-action:none}
@@ -399,12 +428,18 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
 <div class="wrap">
 
   <div class="brandbar">
-    <div class="mark"><b>ALMA</b> · Capstone</div>
-    <div class="madrid"><svg viewBox="0 0 100 110" aria-label="Coat of arms of Madrid"><g class="mc"><rect x="74" y="50" width="5" height="52" rx="1"/><circle cx="80" cy="40" r="16"/><rect x="10" y="100" width="82" height="3.5" rx="1.5"/><ellipse cx="44" cy="72" rx="19" ry="27"/><circle cx="47" cy="38" r="13"/><circle cx="38" cy="27" r="5.5"/><circle cx="56" cy="27" r="5.5"/><ellipse cx="59" cy="41" rx="6.5" ry="4.5"/><ellipse cx="34" cy="98" rx="8" ry="4"/><ellipse cx="53" cy="98" rx="8" ry="4"/><path d="M55 54 Q69 48 76 57 L73 62 Q65 56 57 62 Z"/></g><g class="mb"><circle cx="75" cy="36" r="2.2"/><circle cx="85" cy="39" r="2.2"/><circle cx="80" cy="45" r="2.2"/><circle cx="47" cy="39" r="1.6"/></g></svg><div class="madrid-t"><b>Ayuntamiento de Madrid</b><span>Oliver · Miguel · Lisa · Caragh · Andre</span><span style="color:var(--ink-3)">IE MRED 2026 · the city's view</span></div></div>
+    <a class="brand" href="index.html"><img class="brand-logo" src="alma-logo-gold.png" alt="ALMA"><span class="brand-sub">Capstone</span></a>
+    <div class="madrid"><svg viewBox="0 0 100 110" aria-label="Coat of arms of Madrid"><g class="mc"><rect x="74" y="50" width="5" height="52" rx="1"/><circle cx="80" cy="40" r="16"/><rect x="10" y="100" width="82" height="3.5" rx="1.5"/><ellipse cx="44" cy="72" rx="19" ry="27"/><circle cx="47" cy="38" r="13"/><circle cx="38" cy="27" r="5.5"/><circle cx="56" cy="27" r="5.5"/><ellipse cx="59" cy="41" rx="6.5" ry="4.5"/><ellipse cx="34" cy="98" rx="8" ry="4"/><ellipse cx="53" cy="98" rx="8" ry="4"/><path d="M55 54 Q69 48 76 57 L73 62 Q65 56 57 62 Z"/></g><g class="mb"><circle cx="75" cy="36" r="2.2"/><circle cx="85" cy="39" r="2.2"/><circle cx="80" cy="45" r="2.2"/><circle cx="47" cy="39" r="1.6"/></g></svg><div class="madrid-t"><b>Ayuntamiento de Madrid</b><span style="color:var(--ink-3)">IE MRED 2026 · the city's view</span></div></div>
   </div>
 
+  <nav class="pagenav" aria-label="Model pages">
+    <a href="index.html"><span class="n">⌂</span>Dashboard</a>
+    <a href="land-value.html"><span class="n">01</span>Land value</a>
+    <a href="land-distribution.html"><span class="n">02</span>Land distribution</a>
+    <a href="city.html" class="act" aria-current="page"><span class="n">03</span>City view</a>
+  </nav>
+
   <div class="topctrl">
-    <div style="display:flex;gap:18px;flex-wrap:wrap"><a class="backlink" href="index.html">&larr; Dashboard</a><a class="backlink" href="land-value.html">Land value &rarr;</a><a class="backlink" href="land-distribution.html">Land distribution &rarr;</a></div>
     <div class="ctrlr">
       <span id="saveTag" class="savetag">auto-saved · synced with main model</span>
       <button id="resetBtn" class="rstbtn">↻ Reset to defaults</button>
@@ -413,6 +448,15 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
 
   <div class="eyebrow">Municipality perspective · interactive</div>
   <h1>The city's view</h1>
+
+  <div class="hero-kpi">
+    <div><span class="hk-num" id="hkNet">+€2.78 bn</span><span class="hk-lab">Net municipal position · 30 yr</span></div>
+    <div class="hk-side">
+      <span class="hk-chip"><b id="hkPop">72,477 residents</b></span>
+      <span class="hk-chip"><b id="hkDens">29,470 inhab/km²</b></span>
+    </div>
+  </div>
+
   <p class="lede">The same ALMA densification, seen from the <b>municipality</b>. New residents bring tax but cost more in services; the city receives serviced land &amp; a cession value, and must fund the transport, schools and health infrastructure the new population needs. Everything below reacts to the density &amp; mix inputs. <span class="estflag">est</span> = working estimate, not an appraised figure.</p>
 
   <!-- ============ DENSITY COMPARISON ============ -->
@@ -433,23 +477,23 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
       <div class="cmp-v prop" id="cmpDens">15,310 <span class="chg">×2.5</span></div>
 
       <div class="cmp-metric">Operating result · 30 yr <small style="color:var(--ink-3)">revenue − opex</small></div>
-      <div class="cmp-v orig">€375 m</div>
-      <div class="cmp-v prop" id="cmpOp">€1.50 bn <span class="chg">×2.8</span></div>
+      <div class="cmp-v orig">€510 m</div>
+      <div class="cmp-v prop" id="cmpOp">€2.99 bn <span class="chg">×5.9</span></div>
 
       <div class="cmp-metric">− Net investing · capex, city-funded <small style="color:var(--ink-3)">aliquot to residents</small></div>
-      <div class="cmp-v orig" style="color:var(--down)">−€83 m</div>
-      <div class="cmp-v prop" id="cmpCapex" style="color:var(--down)">−€336 m <span class="chg">aliquot to residents</span></div>
+      <div class="cmp-v orig" style="color:var(--down)">−€43 m</div>
+      <div class="cmp-v prop" id="cmpCapex" style="color:var(--down)">−€212 m <span class="chg">aliquot to residents</span></div>
 
       <div class="cmp-metric netr">= Net municipal position · 30 yr</div>
-      <div class="cmp-v net-o" style="color:var(--up)">+€292 m</div>
-      <div class="cmp-v net-p" id="cmpNet">+€1.17 bn</div>
+      <div class="cmp-v net-o" style="color:var(--up)">+€467 m</div>
+      <div class="cmp-v net-p" id="cmpNet">+€2.78 bn</div>
     </div>
-    <div class="cmp-flip">Even at today's low density the district is already <b class="pos">+€292 m</b> positive over 30 yr. Densifying more than <b>doubles the resident count</b> — so the aliquot infrastructure and services rise too (net investing <b class="neg">−€83 m → −€212 m</b>) — yet the net position still grows <b>×3.1 to <span class="pos">+€913 m</span></b>, because tax revenue on the larger, appreciating stock scales faster than the infrastructure it funds.</div>
+    <div class="cmp-flip">Even at today's low density the district is already <b class="pos">+€467 m</b> positive over 30 yr. Densifying lifts the resident count almost <b>five-fold</b> — so the aliquot infrastructure and services rise too (net investing <b class="neg">−€43 m → −€212 m</b>) — yet the net position still grows <b>×5.9 to <span class="pos">+€2.78 bn</span></b>, because tax revenue on the larger, appreciating stock scales faster than the infrastructure it funds.</div>
   </div>
 
 
   <!-- ============ CONTROLS ============ -->
-  <div class="controls">
+  <div class="controls" id="cityControls">
     <div class="phase">
       <div class="phase-h"><span class="pt">Phase I</span><span class="pl">land 737,797 m²</span></div>
       <div class="mini">
@@ -474,7 +518,7 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     </div>
   </div>
 
-  <div class="card pad" style="margin-top:18px">
+  <div class="card pad" id="cityAssump" style="margin-top:18px">
     <div class="bdh" style="margin-bottom:14px">Assumptions <span class="estflag">est</span> · all editable, everything reacts</div>
 
     <div class="agrid">
@@ -798,10 +842,15 @@ input[type=range]::-moz-range-thumb{width:17px; height:17px; border-radius:50%; 
     <div class="note" style="margin-top:10px">Value weight (homogenisation coefficient) used for the aprovechamiento cession: free-market &amp; economic = 1.00, affordable/social = <b>0.50</b> (VPO policy weight, per the Excel model).</div>
   </div>
 
-  <div class="foot">
-    Method: residential GFA is generated from the phase densities (Phase I land 737,797 m² · Phase II &amp; III 1,721,525 m²), split residential / economic and affordable / free, converted to m² útil, dwellings and population. Population over the urbanised developable area (2,459,322 m² = 2.459 km²) gives the density that drives metro viability. Fiscal balance, infrastructure capex and the cession value all react live. <b>All figures are working assumptions for this model, not appraised values.</b>
+  <!-- mobile: levers & assumptions relocate here (end of page) -->
+  <div id="cityDock">
+    <div class="eyebrow" style="margin:0 0 12px">Levers &amp; assumptions · edit anything, everything reacts</div>
   </div>
-  <div class="disc">Informačný charakter — interný analytický model, nie je investičným prospektom ani verejnou ponukou cenných papierov. Hodnoty sú orientačné a negarantované.</div>
+
+  <div class="foot">
+    Method: residential GFA is generated from the phase densities on the total-land basis (GFA = density × each phase's land share, phases 30 / 35 / 35 % of the 4.73 M m² total — matches the Excel Model), split residential / economic and affordable / free, converted to m² útil, dwellings and population. Population over the urbanised developable area (2,459,320 m² = 2.459 km²) gives the density that drives metro viability. Fiscal balance, infrastructure capex and the cession value all react live. <b>All figures are working assumptions for this model, not appraised values.</b>
+  </div>
+  <div class="disc">Informational only — an internal analytical model, not an investment prospectus or a public offering of securities. All figures are indicative and not guaranteed.</div>
 </div>
 
 <script>
@@ -811,6 +860,7 @@ const LAND_R   = 1721525;         // Phase II & III developable land, m² (70% �
 const LAND_DEV = LAND_P1+LAND_R;  // 2,459,322 — developable
 const LAND_RES = 4734060-LAND_DEV;// 2,274,738 — green reserve / Cañada Real corridor (aligned to Excel total 4,734,060)
 const DEV_KM2  = LAND_DEV/1e6;    // 2.459 km² — urbanised area for density
+const TOT_FACTOR = 4734060/LAND_DEV;  // GFA basis: density × total-land phase allotment (Excel Model). ≈1.925
 const ECO_COL  = '#a89a82';
 
 const fmtE  = n => (n<0?'–€':'€') + Math.abs(Math.round(n)).toLocaleString('en-US');
@@ -823,7 +873,7 @@ const nf    = n => Math.round(n).toLocaleString('en-US');
 
 /* residential floor area generated per phase (housing m²e, by aff / free) */
 function phaseResi(land, dens, affShare, cess, RESID){
-  const gfa  = land*dens;
+  const gfa  = land*dens*TOT_FACTOR;   // GFA = density × total-land phase allotment (Excel Model B50)
   const gfaR = gfa*(1-cess);
   const aff  = gfaR*RESID*affShare;
   const free = gfaR*RESID*(1-affShare);
@@ -835,7 +885,7 @@ function phaseResi(land, dens, affShare, cess, RESID){
 function phaseCity(land, dens, aff, resiShare){
   const RESI=Math.min(1,Math.max(0,resiShare)), ECON=1-RESI;
   const coefFree=1, coefAff=0.5, cessPct=0.20, handAff=0.5;   // value weights & handover mix (policy)
-  const gfa=land*dens;
+  const gfa=land*dens*TOT_FACTOR;   // GFA = density × total-land phase allotment (Excel Model B50)
   const resiRaw=gfa*RESI, econRaw=gfa*ECON;
   const affQ=resiRaw*aff, freeQ=resiRaw*(1-aff);
   const vu=affQ*coefAff+freeQ*coefFree+econRaw*coefFree;      // aprovechamiento (value units)
@@ -1002,8 +1052,8 @@ function calc(){
   const capGainPct=Math.max(0,+$('capexGain').value||0)/100;// 0.65 co-funding
   const cpiMat=(+$('cpiMat').value||0)/100, cpiSvc=(+$('cpiSvc').value||0)/100, hpi=(+$('hpi').value||0)/100;
   // fixed engine constants (from Excel City-30Y assumption panel)
-  const IAE_UPLIFT=1.5, BUS_PER_RES=159.356, FAC_PER_RES=4329.177, GREEN_SHARE=0.15;
-  const CESS_PER_M2=400.625, TUN_BASE=195, ALIQ_ANCHOR=37651.499, HORIZON=30, OCC_LAG=1, TARGET_OCC=20;
+  const IAE_UPLIFT=1.5, BUS_PER_RES=82.783, FAC_PER_RES=2249.0, GREEN_SHARE=0.15;
+  const CESS_PER_M2=440.8268, TUN_BASE=195, ALIQ_ANCHOR=72477.1, HORIZON=30, OCC_LAG=1, TARGET_OCC=20;
 
   // ---- stock bases (útil-priced residential; econ at free price) ----
   const retained = resiM2e + econT;                        // retained GFA after cession (Excel D42)
@@ -1210,7 +1260,7 @@ function calc(){
   // ---- density comparison · Original = fixed A baseline · Proposed = live model ----
   {
     const s=(id,html)=>{const e=$(id); if(e) e.innerHTML=html;};
-    const O={res:14769.946, dens:6005.702, op:375.0, netinv:-83.0, net:292.0};   // Excel Scenario A (€M)
+    const O={res:14769.946, dens:6005.702, op:510.4, netinv:-43.2, net:467.2};   // Excel Scenario A (€M) — final model
     const chg=t=>' <span class="chg">'+t+'</span>';
     s('cmpRes', nf(pop)+chg('×'+(pop/O.res).toFixed(1)));
     s('cmpDens', nf(dens)+chg('×'+(dens/O.dens).toFixed(1)));
@@ -1437,6 +1487,32 @@ calc();
     if(g('cyNetRes'))g('bOut').textContent=g('cyNetRes').textContent;
   };
   syncDensBar();
+})();
+</script>
+<script>
+/* headline KPI band mirrors the live model values */
+(function(){
+  function bind(srcId,dstId){var s=document.getElementById(srcId),d=document.getElementById(dstId);if(!s||!d)return;
+    var f=function(){d.textContent=s.textContent;};
+    new MutationObserver(f).observe(s,{childList:true,characterData:true,subtree:true}); f();}
+  bind('cyNetRes','hkNet'); bind('cyPop','hkPop'); bind('cyDens','hkDens');
+})();
+</script>
+<script>
+/* mobile: move levers + assumptions to the end of the page; restore on desktop */
+(function(){
+  var mq=window.matchMedia('(max-width:920px)');
+  var ctl=document.getElementById('cityControls'), asm=document.getElementById('cityAssump'), dock=document.getElementById('cityDock');
+  if(!ctl||!asm||!dock) return;
+  var mkC=document.createElement('div'), mkA=document.createElement('div');
+  mkC.style.display='none'; mkA.style.display='none';
+  ctl.parentNode.insertBefore(mkC,ctl); asm.parentNode.insertBefore(mkA,asm);
+  function place(){
+    if(mq.matches){ dock.appendChild(ctl); dock.appendChild(asm); dock.classList.add('on'); }
+    else{ mkC.parentNode.insertBefore(ctl,mkC.nextSibling); mkA.parentNode.insertBefore(asm,mkA.nextSibling); dock.classList.remove('on'); }
+  }
+  if(mq.addEventListener) mq.addEventListener('change',place); else mq.addListener(place);
+  place();
 })();
 </script>
 </body>

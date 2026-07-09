@@ -23,6 +23,18 @@
   .brandbar{display:flex;align-items:center;justify-content:space-between;padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:44px}
   .mark{font-weight:300;letter-spacing:.26em;font-size:13px;text-transform:uppercase;color:var(--ink-3)}
   .mark b{color:var(--ink-2);font-weight:500;letter-spacing:.3em}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+  .brand-logo{height:46px;width:auto;display:block}
+  .brand-sub{font-weight:300;letter-spacing:.26em;font-size:12px;text-transform:uppercase;color:var(--ink-3);border-left:1px solid var(--line);padding-left:14px;line-height:1.3}
+  @media(max-width:640px){.brand-logo{height:38px}.brand{gap:11px}.brand-sub{padding-left:11px;font-size:11px}}
+  .pagenav{display:flex;gap:8px;margin:-18px 0 32px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px}
+  .pagenav::-webkit-scrollbar{display:none}
+  .pagenav a{flex:none;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink-2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;transition:border-color .18s,color .18s}
+  .pagenav a:hover{border-color:var(--accent-d);color:var(--ink)}
+  .pagenav a.act{border-color:var(--accent);color:var(--accent);background:rgba(201,168,106,.1);font-weight:600;pointer-events:none}
+  .pagenav a .n{font-size:10px;color:var(--ink-3);font-weight:600;letter-spacing:.08em}
+  .pagenav a.act .n{color:var(--accent-d)}
+  @media(max-width:640px){.pagenav{margin:-14px calc(-1*clamp(20px,4vw,40px)) 26px;padding:2px clamp(20px,4vw,40px)}.pagenav a{padding:11px 15px;font-size:12.5px}}
   .ctx{font-size:12px;color:var(--ink-3);letter-spacing:.16em;text-transform:uppercase;text-align:right;line-height:1.7}
   .kicker{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-d);margin-bottom:14px}
   h1{font-size:clamp(34px,5vw,58px);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin-bottom:16px}
@@ -64,7 +76,13 @@
     background:linear-gradient(90deg,var(--ink) 55%,var(--accent));-webkit-background-clip:text;background-clip:text}
   .hb-logo{width:min(300px,58%);height:auto;display:block;margin:2px 0 8px}
   @media(max-width:680px){.hb-logo{width:min(220px,70%);margin:6px auto 10px}}
-  .hb-tag{font-size:clamp(14px,1.6vw,17px);color:var(--ink-2);max-width:560px;margin:16px 0 clamp(26px,3vw,40px);line-height:1.55}
+  .hb-tag{font-size:clamp(14px,1.6vw,17px);color:var(--ink-2);max-width:560px;margin:16px 0 clamp(20px,2.4vw,30px);line-height:1.55}
+  .hb-stats{display:flex;gap:10px 28px;flex-wrap:wrap;margin:0 0 clamp(24px,3vw,38px)}
+  .hb-stats>div{min-width:0}
+  .hb-stats b{display:block;font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+  .hb-stats .up{color:var(--up)} .hb-stats .gold{color:var(--gold)} .hb-stats .acc{color:var(--accent-d)}
+  .hb-stats span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  @media(max-width:680px){.hb-stats{gap:8px 20px}}
   .hb-skyline{display:flex;align-items:flex-end;gap:clamp(4px,.9vw,9px);height:clamp(70px,9vw,120px);
     margin:0 calc(-1*clamp(26px,4vw,54px));padding:0 clamp(26px,4vw,54px);opacity:.9}
   .hb-skyline i{flex:1;border-radius:3px 3px 0 0;display:block;min-width:6px}
@@ -91,14 +109,27 @@
 <body>
 <div class="wrap">
   <div class="brandbar">
-    <div class="mark"><b>ALMA</b> · Capstone</div>
-    <div class="ctx"><span style="color:var(--ink-2)">Capstone team — Oliver · Miguel · Lisa · Caragh · Andre</span><br>Residual land-value model · IE MRED 2026</div>
+    <a class="brand" href="index.html"><img class="brand-logo" src="alma-logo-gold.png" alt="ALMA"><span class="brand-sub">Capstone</span></a>
+    <div class="ctx">Residual land-value model<br>IE MRED 2026</div>
   </div>
+
+  <nav class="pagenav" aria-label="Model pages">
+    <a href="index.html" class="act" aria-current="page"><span class="n">⌂</span>Dashboard</a>
+    <a href="land-value.html"><span class="n">01</span>Land value</a>
+    <a href="land-distribution.html"><span class="n">02</span>Land distribution</a>
+    <a href="city.html"><span class="n">03</span>City view</a>
+  </nav>
 
   <div class="hero-banner">
     <div class="hb-kick">UZP 02.02 · Vicálvaro · Madrid</div>
     <img class="hb-logo" src="alma-logo-gold.png" alt="ALMA — Armonía · Libertad · Movimiento · Arraigo">
     <div class="hb-tag">A residual land-value model for the densification of the ALMA site — the land value it creates, how the land is distributed, and what the city gets.</div>
+    <div class="hb-stats">
+      <div><b class="up">€1.75 bn</b><span>residual land value</span></div>
+      <div><b class="gold">+€943 m</b><span>created · ×2.2</span></div>
+      <div><b class="acc">31,512</b><span>homes</span></div>
+      <div><b class="up">+€2.78 bn</b><span>city · net 30 yr</span></div>
+    </div>
     <div class="hb-skyline"><i style="height:38%;background:var(--accent)"></i><i style="height:52%;background:var(--slate)"></i><i style="height:44%;background:var(--slate)"></i><i style="height:66%;background:var(--slate)"></i><i style="height:58%;background:var(--slate)"></i><i style="height:74%;background:var(--accent)"></i><i style="height:49%;background:var(--slate)"></i><i style="height:88%;background:var(--up)"></i><i style="height:62%;background:var(--slate)"></i><i style="height:55%;background:var(--slate)"></i><i style="height:100%;background:var(--up)"></i><i style="height:70%;background:var(--slate)"></i><i style="height:46%;background:var(--slate)"></i><i style="height:60%;background:var(--slate)"></i><i style="height:82%;background:var(--slate)"></i><i style="height:50%;background:var(--accent)"></i><i style="height:64%;background:var(--slate)"></i><i style="height:42%;background:var(--slate)"></i><i style="height:56%;background:var(--slate)"></i><i style="height:72%;background:var(--slate)"></i><i style="height:48%;background:var(--accent)"></i><i style="height:58%;background:var(--slate)"></i></div>
   </div>
 
@@ -108,10 +139,10 @@
 
   <!-- KPI strip -->
   <div class="kpis">
-    <div class="kpi"><div class="kl">Residual land value</div><div class="kv up">€687 m</div><div class="ks">proposed · phased FAR 0.80 / 1.05</div></div>
-    <div class="kpi"><div class="kl">Value created</div><div class="kv gold">+€432 m</div><div class="ks">×2.7 vs today's FAR 0.39 (€255 m)</div></div>
-    <div class="kpi"><div class="kl">Homes · residents</div><div class="kv acc">16,370</div><div class="ks">≈ 37,651 residents · 15,310 /km²</div></div>
-    <div class="kpi"><div class="kl">Municipality · net 30 yr</div><div class="kv up">+€913 m</div><div class="ks">incl. public-asset value</div></div>
+    <div class="kpi"><div class="kl">Residual land value</div><div class="kv up">€1.75 bn</div><div class="ks">proposed · phased density 0.80 / 1.05</div></div>
+    <div class="kpi"><div class="kl">Value created</div><div class="kv gold">+€943 m</div><div class="ks">×2.2 vs uniform baseline 0.39 (€803 m)</div></div>
+    <div class="kpi"><div class="kl">Homes · residents</div><div class="kv acc">31,512</div><div class="ks">≈ 72,477 residents · 29,470 /km²</div></div>
+    <div class="kpi"><div class="kl">Municipality · net 30 yr</div><div class="kv up">+€2.78 bn</div><div class="ks">incl. public-asset value</div></div>
   </div>
 
   <div class="sec-h">The model · three views</div>
@@ -120,7 +151,7 @@
       <div class="pn">01 · Land value</div>
       <h3>Residual land value</h3>
       <div class="pd">GDV − construction − urbanisation − Junta fee − 25% margin, per phase. Adjust density &amp; affordable mix; the land value recomputes live.</div>
-      <div class="pm"><span class="pmv up">€687 m</span><span class="open">Open →</span></div>
+      <div class="pm"><span class="pmv up">€1.75 bn</span><span class="open">Open →</span></div>
     </a>
     <a class="pcard" href="land-distribution.html">
       <div class="pn">02 · Land distribution</div>
@@ -132,7 +163,7 @@
       <div class="pn">03 · City view</div>
       <h3>The municipality's P&amp;L</h3>
       <div class="pd">The same densification seen from the Ayuntamiento — revenue, OPEX and CAPEX over 30 years, netting to the public bottom line. Population computed from density.</div>
-      <div class="pm"><span class="pmv up">+€913 m</span><span class="open">Open →</span></div>
+      <div class="pm"><span class="pmv up">+€2.78 bn</span><span class="open">Open →</span></div>
     </a>
   </div>
 
