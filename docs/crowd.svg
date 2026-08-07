@@ -1,0 +1,20 @@
+<svg viewBox="0 0 476 92" role="img" aria-label="Ilustrácia tímu na školení" class="crowd">
+<circle cx="22" cy="23" r="13" fill="#12695e"/>
+<path d="M0 92 v-37 a22.0 22.0 0 0 1 44 0 v37 z" fill="#12695e" opacity=".9"/>
+<circle cx="76" cy="20" r="13" fill="#c2531f"/>
+<path d="M54 92 v-40 a22.0 22.0 0 0 1 44 0 v40 z" fill="#c2531f" opacity=".9"/>
+<circle cx="130" cy="23" r="13" fill="#8a6d12"/>
+<path d="M108 92 v-37 a22.0 22.0 0 0 1 44 0 v37 z" fill="#8a6d12" opacity=".9"/>
+<circle cx="184" cy="26" r="13" fill="#1f8476"/>
+<path d="M162 92 v-34 a22.0 22.0 0 0 1 44 0 v34 z" fill="#1f8476" opacity=".9"/>
+<circle cx="238" cy="20" r="13" fill="#d97640"/>
+<path d="M216 92 v-40 a22.0 22.0 0 0 1 44 0 v40 z" fill="#d97640" opacity=".9"/>
+<circle cx="292" cy="20" r="13" fill="#a8863c"/>
+<path d="M270 92 v-40 a22.0 22.0 0 0 1 44 0 v40 z" fill="#a8863c" opacity=".9"/>
+<circle cx="346" cy="26" r="13" fill="#0e5349"/>
+<path d="M324 92 v-34 a22.0 22.0 0 0 1 44 0 v34 z" fill="#0e5349" opacity=".9"/>
+<circle cx="400" cy="20" r="13" fill="#b5471a"/>
+<path d="M378 92 v-40 a22.0 22.0 0 0 1 44 0 v40 z" fill="#b5471a" opacity=".9"/>
+<circle cx="454" cy="23" r="13" fill="#12695e"/>
+<path d="M432 92 v-37 a22.0 22.0 0 0 1 44 0 v37 z" fill="#12695e" opacity=".9"/>
+</svg>

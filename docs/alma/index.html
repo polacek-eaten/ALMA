@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALMA — Capstone Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0d; --bg-2:#121419; --surface:#121419; --surface-2:#171a20;
+    --accent:#c9a86a; --accent-d:#d8bd86; --blue-l:#9aa0aa;
+    --ink:#f3f4f6; --ink-2:rgba(241,242,245,.68); --ink-3:rgba(241,242,245,.52);
+    --line:rgba(238,240,243,.12); --line-2:rgba(238,240,243,.2);
+    --up:#6fca9a; --down:#e08a72; --gold:#c9a86a;
+    --r:16px; --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,sans-serif;font-weight:400;
+    -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;line-height:1.6}
+  .wrap{max-width:1180px;margin:0 auto;padding:clamp(28px,5vw,56px) clamp(20px,4vw,40px)}
+  .brandbar{display:flex;align-items:center;justify-content:space-between;padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:44px}
+  .mark{font-weight:300;letter-spacing:.26em;font-size:13px;text-transform:uppercase;color:var(--ink-3)}
+  .mark b{color:var(--ink-2);font-weight:500;letter-spacing:.3em}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+  .brand-logo{height:46px;width:auto;display:block}
+  .brand-sub{font-weight:300;letter-spacing:.26em;font-size:12px;text-transform:uppercase;color:var(--ink-3);border-left:1px solid var(--line);padding-left:14px;line-height:1.3}
+  @media(max-width:640px){.brand-logo{height:38px}.brand{gap:11px}.brand-sub{padding-left:11px;font-size:11px}}
+  .pagenav{display:flex;gap:8px;margin:-18px 0 32px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px}
+  .pagenav::-webkit-scrollbar{display:none}
+  .pagenav a{flex:none;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink-2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;transition:border-color .18s,color .18s}
+  .pagenav a:hover{border-color:var(--accent-d);color:var(--ink)}
+  .pagenav a.act{border-color:var(--accent);color:var(--accent);background:rgba(201,168,106,.1);font-weight:600;pointer-events:none}
+  .pagenav a .n{font-size:10px;color:var(--ink-3);font-weight:600;letter-spacing:.08em}
+  .pagenav a.act .n{color:var(--accent-d)}
+  @media(max-width:640px){.pagenav{margin:-14px calc(-1*clamp(20px,4vw,40px)) 26px;padding:2px clamp(20px,4vw,40px)}.pagenav a{padding:11px 15px;font-size:12.5px}}
+  .ctx{font-size:12px;color:var(--ink-3);letter-spacing:.16em;text-transform:uppercase;text-align:right;line-height:1.7}
+  .kicker{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-d);margin-bottom:14px}
+  h1{font-size:clamp(34px,5vw,58px);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin-bottom:16px}
+  .lede{font-size:clamp(16px,1.7vw,18px);color:var(--ink-2);max-width:760px;margin-bottom:44px}
+
+  /* KPI strip */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 22px}
+  .kpi .kl{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .kpi .kv{font-size:clamp(26px,2.6vw,34px);font-weight:700;letter-spacing:-.02em;margin-top:10px}
+  .kpi .kv.up{color:var(--up)} .kpi .kv.gold{color:var(--gold)} .kpi .kv.acc{color:var(--accent)}
+  .kpi .ks{font-size:12px;color:var(--ink-3);margin-top:7px}
+  @media(max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
+
+  /* page cards */
+  .sec-h{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:44px 0 18px}
+  .pages{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:900px){.pages{grid-template-columns:1fr}}
+  .pcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px;text-decoration:none;
+    color:var(--ink);display:flex;flex-direction:column;transition:.22s var(--ease);position:relative;overflow:hidden}
+  .pcard:hover{border-color:var(--accent-d);background:var(--surface-2);transform:translateY(-3px)}
+  .pcard .pn{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-d);font-weight:600}
+  .pcard h3{font-size:23px;font-weight:600;letter-spacing:-.01em;margin:10px 0 12px}
+  .pcard .pd{font-size:14px;color:var(--ink-2);line-height:1.6;flex:1}
+  .pcard .pm{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between}
+  .pcard .pmv{font-size:24px;font-weight:700;letter-spacing:-.02em}
+  .pcard .pmv.up{color:var(--up)} .pcard .pmv.gold{color:var(--gold)} .pcard .pmv.acc{color:var(--accent)}
+  .pcard .open{font-size:13px;color:var(--accent-d);font-weight:600;display:inline-flex;gap:6px;transition:gap .2s}
+  .pcard:hover .open{gap:11px}
+  .foot{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);font-size:11.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* ---- hero banner (intro) ---- */
+  .hero-banner{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    background:radial-gradient(120% 140% at 85% -20%,rgba(201,168,106,.16),transparent 55%),linear-gradient(160deg,var(--surface),#0a0b0d);
+    padding:clamp(30px,4.5vw,58px) clamp(26px,4vw,54px) 0;margin-bottom:26px}
+  .hb-kick{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+  .hb-mark{font-size:clamp(58px,13vw,150px);font-weight:700;letter-spacing:-.04em;line-height:.9;color:var(--ink);
+    background:linear-gradient(90deg,var(--ink) 55%,var(--accent));-webkit-background-clip:text;background-clip:text}
+  .hb-logo{width:min(300px,58%);height:auto;display:block;margin:2px 0 8px}
+  @media(max-width:680px){.hb-logo{width:min(220px,70%);margin:6px auto 10px}}
+  .hb-tag{font-size:clamp(14px,1.6vw,17px);color:var(--ink-2);max-width:560px;margin:16px 0 clamp(20px,2.4vw,30px);line-height:1.55}
+  .hb-stats{display:flex;gap:10px 28px;flex-wrap:wrap;margin:0 0 clamp(24px,3vw,38px)}
+  .hb-stats>div{min-width:0}
+  .hb-stats b{display:block;font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+  .hb-stats .up{color:var(--up)} .hb-stats .gold{color:var(--gold)} .hb-stats .acc{color:var(--accent-d)}
+  .hb-stats span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  @media(max-width:680px){.hb-stats{gap:8px 20px}}
+  .hb-skyline{display:flex;align-items:flex-end;gap:clamp(4px,.9vw,9px);height:clamp(70px,9vw,120px);
+    margin:0 calc(-1*clamp(26px,4vw,54px));padding:0 clamp(26px,4vw,54px);opacity:.9}
+  .hb-skyline i{flex:1;border-radius:3px 3px 0 0;display:block;min-width:6px}
+  @media(max-width:640px){
+    html,body{overflow-x:hidden;max-width:100%}
+    .brandbar{flex-direction:column;align-items:stretch;gap:7px}
+    .brandbar>*{max-width:100%;min-width:0;overflow-wrap:anywhere}
+    .brandbar .ctx,.brandbar .madrid-t{text-align:left}
+    body :where(div,span,p,b,small,td,th,a,li){min-width:0}
+    body :where(.top,.arow,.crow,.lr,.zr,.headline-val,.wf,.costhead,.persqm,.skyhead,.labs,.stat,.metrow,.herolegend,.madrid,.plstrip,.kpi,.pm,.kpis){flex-wrap:wrap}
+    body :where(p,.note,.formula,.sub,.assump,.meta,.lede,.pd,td,.lh,.fm,.h-sub){overflow-wrap:anywhere}
+    table{table-layout:fixed;width:100%}
+  }
+
+  @media(max-width:520px){.kpis{grid-template-columns:1fr}.kpi{padding:18px 18px}}
+  @media(max-width:640px){*{-webkit-tap-highlight-color:transparent}.pcard{border-radius:14px}}
+  .page-footer{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;max-width:1180px;margin:56px auto 0;padding:22px 32px 44px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .page-footer .pf-l{font-size:13px;font-weight:300;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3)}
+  .page-footer .pf-l b{color:var(--ink-2);font-weight:500;letter-spacing:.3em}
+  .page-footer .pf-r{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.7}
+  @media(max-width:640px){.page-footer{flex-direction:column;gap:8px;padding:20px 16px 44px;margin-top:40px}.page-footer .pf-r{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brandbar">
+    <a class="brand" href="index.html"><img class="brand-logo" src="alma-logo-gold.png" alt="ALMA"><span class="brand-sub">Capstone</span></a>
+    <div class="ctx">Residual land-value model<br>IE MRED 2026</div>
+  </div>
+
+  <nav class="pagenav" aria-label="Model pages">
+    <a href="index.html" class="act" aria-current="page"><span class="n">⌂</span>Dashboard</a>
+    <a href="land-value.html"><span class="n">01</span>Land value</a>
+    <a href="land-distribution.html"><span class="n">02</span>Land distribution</a>
+    <a href="city.html"><span class="n">03</span>City view</a>
+  </nav>
+
+  <div class="hero-banner">
+    <div class="hb-kick">UZP 02.02 · Vicálvaro · Madrid</div>
+    <img class="hb-logo" src="alma-logo-gold.png" alt="ALMA — Armonía · Libertad · Movimiento · Arraigo">
+    <div class="hb-tag">A residual land-value model for the densification of the ALMA site — the land value it creates, how the land is distributed, and what the city gets.</div>
+    <div class="hb-stats">
+      <div><b class="up">€1.75 bn</b><span>residual land value</span></div>
+      <div><b class="gold">+€943 m</b><span>created · ×2.2</span></div>
+      <div><b class="acc">31,512</b><span>homes</span></div>
+      <div><b class="up">+€2.78 bn</b><span>city · net 30 yr</span></div>
+    </div>
+    <div class="hb-skyline"><i style="height:38%;background:var(--accent)"></i><i style="height:52%;background:var(--slate)"></i><i style="height:44%;background:var(--slate)"></i><i style="height:66%;background:var(--slate)"></i><i style="height:58%;background:var(--slate)"></i><i style="height:74%;background:var(--accent)"></i><i style="height:49%;background:var(--slate)"></i><i style="height:88%;background:var(--up)"></i><i style="height:62%;background:var(--slate)"></i><i style="height:55%;background:var(--slate)"></i><i style="height:100%;background:var(--up)"></i><i style="height:70%;background:var(--slate)"></i><i style="height:46%;background:var(--slate)"></i><i style="height:60%;background:var(--slate)"></i><i style="height:82%;background:var(--slate)"></i><i style="height:50%;background:var(--accent)"></i><i style="height:64%;background:var(--slate)"></i><i style="height:42%;background:var(--slate)"></i><i style="height:56%;background:var(--slate)"></i><i style="height:72%;background:var(--slate)"></i><i style="height:48%;background:var(--accent)"></i><i style="height:58%;background:var(--slate)"></i></div>
+  </div>
+
+  <div class="kicker">ALMA · UZP 02.02 · Vicálvaro, Madrid</div>
+  <h1>Capstone Dashboard</h1>
+  <p class="lede">A densification proposal for ALMA, modelled end-to-end: the <b style="color:var(--ink)">residual land value</b> it creates, how the <b style="color:var(--ink)">land is distributed</b>, and what the <b style="color:var(--ink)">municipality</b> gets. All figures flow from one model.</p>
+
+  <!-- KPI strip -->
+  <div class="kpis">
+    <div class="kpi"><div class="kl">Residual land value</div><div class="kv up">€1.75 bn</div><div class="ks">proposed · phased density 0.80 / 1.05</div></div>
+    <div class="kpi"><div class="kl">Value created</div><div class="kv gold">+€943 m</div><div class="ks">×2.2 vs uniform baseline 0.39 (€803 m)</div></div>
+    <div class="kpi"><div class="kl">Homes · residents</div><div class="kv acc">31,512</div><div class="ks">≈ 72,477 residents · 29,470 /km²</div></div>
+    <div class="kpi"><div class="kl">Municipality · net 30 yr</div><div class="kv up">+€2.78 bn</div><div class="ks">incl. public-asset value</div></div>
+  </div>
+
+  <div class="sec-h">The model · three views</div>
+  <div class="pages">
+    <a class="pcard" href="land-value.html">
+      <div class="pn">01 · Land value</div>
+      <h3>Residual land value</h3>
+      <div class="pd">GDV − construction − urbanisation − Junta fee − 25% margin, per phase. Adjust density &amp; affordable mix; the land value recomputes live.</div>
+      <div class="pm"><span class="pmv up">€1.75 bn</span><span class="open">Open →</span></div>
+    </a>
+    <a class="pcard" href="land-distribution.html">
+      <div class="pn">02 · Land distribution</div>
+      <h3>How the land splits</h3>
+      <div class="pd">Developable vs green reserve, the 0.50×GFA public cesiones (green · social · transport · connections) and the buildable plots (solares) left for sale.</div>
+      <div class="pm"><span class="pmv acc">0.50 × GFA</span><span class="open">Open →</span></div>
+    </a>
+    <a class="pcard" href="city.html">
+      <div class="pn">03 · City view</div>
+      <h3>The municipality's P&amp;L</h3>
+      <div class="pd">The same densification seen from the Ayuntamiento — revenue, OPEX and CAPEX over 30 years, netting to the public bottom line. Population computed from density.</div>
+      <div class="pm"><span class="pmv up">+€2.78 bn</span><span class="open">Open →</span></div>
+    </a>
+  </div>
+
+  <footer class="page-footer"><div class="pf-l"><b>ALMA</b> · Capstone</div><div class="pf-r">Capstone team — Oliver · Miguel · Lisa · Caragh · Andre<br>Residual land-value model · IE MRED 2026</div></footer>
+</div>
+</body>
+</html>
